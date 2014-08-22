@@ -28,5 +28,11 @@ describe Donation_Location do
     expect(test_donation_location).to eq test_donation_location2
   end
 
+  it "sets an ID to a donation location when it is saved" do
+    test_donation_location = Donation_Location.new ({:name => 'Red Cross'})
+    test_donation_location.save
+    expect(test_donation_location.id).to be_an_instance_of Fixnum
+  end
+
 
 end
