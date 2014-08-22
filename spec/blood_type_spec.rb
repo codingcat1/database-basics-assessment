@@ -5,4 +5,9 @@ describe Blood_Type do
     test_blood_type = Blood_Type.new ({:name => 'B+'})
     expect(test_blood_type).to be_an_instance_of Blood_Type
   end
+
+  it "shows the user the blood type they initialized" do
+    test_blood_type = Blood_Type.new ({:name => 'B+'})
+    expect(test_blood_type.name).to eq 'B+'
+  end
 end
