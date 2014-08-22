@@ -10,4 +10,10 @@ describe Blood_Type do
     test_blood_type = Blood_Type.new ({:name => 'B+'})
     expect(test_blood_type.name).to eq 'B+'
   end
+
+  it "starts out with an empty array of blood types" do
+    test_blood_type = Blood_Type.new ({:name => 'B+'})
+    expect(Blood_Type.all).to eq []
+  end
+
 end

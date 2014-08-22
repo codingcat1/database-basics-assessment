@@ -5,4 +5,7 @@ class Blood_Type
     @name = attributes[:name]
   end
 
+  def self.all
+    blood_types = []
+  end
 end
