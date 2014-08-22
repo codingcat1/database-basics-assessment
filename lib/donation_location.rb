@@ -1,4 +1,4 @@
-class Location
+class Donation_Location
   attr_reader :name
 
   def initialize(attributes)
@@ -6,7 +6,7 @@ class Location
   end
 
   def self.all
-    locations = []
+    donation_locations = []
   end
 
 end
