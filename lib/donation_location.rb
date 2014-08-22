@@ -25,5 +25,4 @@ class Donation_Location
   def ==(another_donation_location)
     (self.name == another_donation_location.name)
   end
-
 end
