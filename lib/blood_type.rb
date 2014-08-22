@@ -1,15 +1,16 @@
 class Blood_Type
-  attr_reader :name
+  attr_reader :name, :id
 
   def initialize(attributes)
     @name = attributes[:name]
+    @id = attributes[:id].to_i
   end
 
   def self.all
     blood_types = []
     results = DB.exec("SELECT * FROM blood_types")
     results.each do |result|
-      attributes = {:name => result['name']}
+      attributes = {:name => result['name'], :id => result['id']}
       current_blood_type = Blood_Type.new(attributes)
       blood_types << current_blood_type
     end
@@ -17,7 +18,8 @@ class Blood_Type
   end
 
   def save
-    results = DB.exec("INSERT INTO blood_types (name) VALUES ('#{@name}');")
+    results = DB.exec("INSERT INTO blood_types (name) VALUES ('#{@name}') RETURNING id;")
+    @id = results.first['id'].to_i
   end
 
   def ==(another_blood_type)

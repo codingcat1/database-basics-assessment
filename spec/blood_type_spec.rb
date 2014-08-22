@@ -22,11 +22,16 @@ describe Blood_Type do
     expect(Blood_Type.all).to eq [test_blood_type]
   end
 
-  it "recognizes two occurrences of a donation location as two separate objects" do
+  it "recognizes two occurrences of a blood type as two separate objects" do
     test_blood_type = Blood_Type.new ({:name => 'B+'})
     test_blood_type2 = Blood_Type.new ({:name => 'B+'})
     expect(test_blood_type).to eq test_blood_type2
   end
 
+  it "sets an ID to a blood type when it is saved" do
+    test_blood_type = Blood_Type.new ({:name => 'B+'})
+    test_blood_type.save
+    expect(test_blood_type.id).to be_an_instance_of Fixnum
+  end
 
 end
