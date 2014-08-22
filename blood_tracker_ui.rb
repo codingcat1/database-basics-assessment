@@ -4,4 +4,42 @@ require './lib/blood_type'
 
 DB = PG.connect(:dbname => "test_blood_tracker_db")
 
+def main_menu
+  loop do
+    system 'clear'
+    puts "*** WELCOME TO BLOOD TRACKER ***\n\n"
+    puts "Press 'l1' to add a Donation Location"
+    puts "Press 'l2' to list Donation Locations"
+    puts "Press 'b1' to add a Blood Type"
+    puts "Press 'b2' to list all Blood Types"
+    puts "Press 'bl' to add a Blood type to a specific Donation Location"
+    puts "Press '1' to show all Blood Types that exist at a specific Donation Location"
+    puts "Press '2' to show all Donation Locations with a specfic Blood Type"
+    puts "Press 'x' to EXIT\n\n"
+    main_choice = gets.chomp
+    if main_choice == 'l1'
+      add_location
+    elsif main_choice == 'l2'
+      list_locations
+    elsif main_choice == 'b1'
+      add_type
+    elsif main_choice == 'b2'
+      list_types
+    elsif main_choice == '1'
+      all_available_types
+    elsif main_choice == '2'
+      all_possessing_locations
+    elsif main_choice == 'x'
+      puts "*** THANK YOU, COME AGAIN LATER ***\n\n"
+      sleep(1)
+      system 'clear'
+      exit
+    else
+      puts "WHOOPS, PLEASE TRY AGAIN."
+      sleep(1)
+      system 'clear'
+    end
+  end
+end
 
+main_menu
