@@ -5,4 +5,8 @@ class Location
     @name = attributes[:name]
   end
 
+  def self.all
+    locations = []
+  end
+
 end

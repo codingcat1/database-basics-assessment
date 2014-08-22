@@ -10,4 +10,9 @@ describe Location do
     test_location = Location.new ({:name => 'Red Cross'})
     expect(test_location.name).to eq 'Red Cross'
   end
+
+  it "starts out with an empty array of donation locations" do
+    test_location = Location.new ({:name => 'Red Cross'})
+    expect(Location.all).to eq []
+  end
 end
