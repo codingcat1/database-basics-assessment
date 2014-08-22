@@ -1,6 +1,7 @@
 require 'pg'
 require './lib/donation_location'
 require './lib/blood_type'
+require 'pry'
 
 DB = PG.connect(:dbname => "test_blood_tracker_db")
 
@@ -41,5 +42,16 @@ def main_menu
     end
   end
 end
+
+def add_location
+  puts "*** NEW LOCATION ***"
+  puts "Please enter the name of a Donation Location:\n\n"
+  location_input = gets.chomp
+  new_location = Donation_Location.new('name' => location_input)
+  new_location.save
+  puts "* #{new_location.name} * has been added to the list of Donation Locations.\n\n"
+  sleep(1.5)
+end
+
 
 main_menu

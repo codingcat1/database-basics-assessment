@@ -2,17 +2,16 @@ class Donation_Location
   attr_reader :name, :id
 
   def initialize(attributes)
-    @name = attributes[:name]
-    @id = attributes[:id].to_i
+    @name = attributes['name']
+    @id = attributes['id'].to_i
   end
 
   def self.all
     donation_locations = []
     results = DB.exec("SELECT * FROM donation_locations")
     results.each do |result|
-      attributes = {:name => result['name'], :id => result['id']}
-      current_donation_location = Donation_Location.new(attributes)
-      donation_locations << current_donation_location
+      new_donation_location = Donation_Location.new(result)
+      donation_locations << new_donation_location
     end
     donation_locations
   end
