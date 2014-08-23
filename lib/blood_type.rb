@@ -10,7 +10,7 @@ class Blood_Type
     blood_types = []
     results = DB.exec("SELECT * FROM blood_types")
     results.each do |result|
-      current_blood_type = Blood_Type.new(attributes)
+      current_blood_type = Blood_Type.new(result)
       blood_types << current_blood_type
     end
     blood_types

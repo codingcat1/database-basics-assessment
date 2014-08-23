@@ -73,5 +73,15 @@ def add_type
   sleep(1.5)
 end
 
+def list_types
+  puts "*** CURRENT BLOOD TYPES ***\n\n"
+  Blood_Type.all.each do |type|
+    puts "#{type.id}. #{type.name}\n\n"
+  end
+  puts "Press 'l' to show all Donation Locations that carry a specific Blood Type."
+  puts "Press 'x' to return to the Main Menu\n\n"
+  choice = gets.chomp
+end
+
 
 main_menu
