@@ -53,6 +53,16 @@ def add_location
   sleep(1.5)
 end
 
+def list_locations
+  puts "*** CURRENT DONATION LOCATIONS ***\n\n"
+  Donation_Location.all.each do |location|
+    puts "#{location.id}. #{location.name}\n\n"
+  end
+  puts "Press 'b' to show all Blood Types available at a specific Donation Location"
+  puts "Press 'x' to return to the Main Menu\n\n"
+  choice = gets.chomp
+end
+
 def add_type
   puts "*** NEW BLOOD TYPE ***"
   puts "Please enter a new Blood Type:\n\n"
