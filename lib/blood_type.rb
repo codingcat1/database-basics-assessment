@@ -25,5 +25,4 @@ class Blood_Type
     (self.name == another_blood_type.name)
   end
 
-
 end
