@@ -49,7 +49,17 @@ def add_location
   location_input = gets.chomp
   new_location = Donation_Location.new('name' => location_input)
   new_location.save
-  puts "* #{new_location.name} * has been added to the list of Donation Locations.\n\n"
+  puts "* #{new_location.name.upcase} * has been added to the list of Donation Locations.\n\n"
+  sleep(1.5)
+end
+
+def add_type
+  puts "*** NEW BLOOD TYPE ***"
+  puts "Please enter a new Blood Type:\n\n"
+  type_input = gets.chomp
+  new_type = Blood_Type.new('name' => type_input)
+  new_type.save
+  puts "* #{new_type.name.upcase} * has been added to the list of Blood Types.\n\n"
   sleep(1.5)
 end
 

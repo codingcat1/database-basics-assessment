@@ -2,15 +2,14 @@ class Blood_Type
   attr_reader :name, :id
 
   def initialize(attributes)
-    @name = attributes[:name]
-    @id = attributes[:id].to_i
+    @name = attributes['name']
+    @id = attributes['id'].to_i
   end
 
   def self.all
     blood_types = []
     results = DB.exec("SELECT * FROM blood_types")
     results.each do |result|
-      attributes = {:name => result['name'], :id => result['id']}
       current_blood_type = Blood_Type.new(attributes)
       blood_types << current_blood_type
     end
@@ -25,5 +24,6 @@ class Blood_Type
   def ==(another_blood_type)
     (self.name == another_blood_type.name)
   end
+
 
 end
