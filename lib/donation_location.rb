@@ -30,14 +30,5 @@ class Donation_Location
     blood_location_id = results.first['id'].to_i
   end
 
-  def self.list_locations_holding_types(location_id)
-    results = DB.exec("SELECT donation_locations.* FROM blood_types JOIN blood_locations ON (blood_types.id = blood_locations.blood_type_id) JOIN donation_locations ON (blood_locations.donation_location_id = donation_locations.id) WHERE blood_types.id = #{blood_type_id};")
-    donation_locations = []
-    results.each do |result|
-      attributes = {:name => result['name'], :id => result['id']}
-      current_donation_location = Donation_Location.new(attributes)
-      donation_locations << current_donation_location
-    end
-    donation_locations
-  end
+
 end
