@@ -26,13 +26,10 @@ class Blood_Type
   end
 
   def self.list_locations_holding_types(location_id)
-    results = DB.exec("SELECT blood_types. * FROM
-    donation_locations JOIN blood_locations ON (donation_locations.id = blood_locations.donation_location_id)
-    JOIN blood_types ON (blood_locations.blood_type_id = blood_types.id)
-    WHERE donation_locations.id = #{location_id};")
-
-
-
+    results = DB.exec("SELECT blood_types. * FROM donation_locations
+      JOIN blood_locations ON (donation_locations.id = blood_locations.donation_location_id)
+      JOIN blood_types ON (blood_locations.blood_type_id = blood_types.id)
+      WHERE donation_locations.id = #{location_id};")
     blood_types = []
     results.each do |result|
       current_blood_type = Blood_Type.new(result)
