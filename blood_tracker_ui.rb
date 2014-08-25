@@ -9,21 +9,17 @@ def main_menu
   loop do
     system 'clear'
     puts "*** WELCOME TO BLOOD TRACKER ***\n\n"
-    puts "Press 'l1' to add a Donation Location"
-    puts "Press 'l2' to list Donation Locations"
-    puts "Press 'b1' to add a Blood Type"
-    puts "Press 'b2' to list all Blood Types"
-    puts "Press 'bl' to add a Blood type to a specific Donation Location"
+    puts "Press 'l' to add a Donation Location"
+    puts "Press 'b' to add a Blood Type"
+    puts "Press 's' to search for all Blood Types at a Location or search for all Locations holding a Blood Type"
     puts "Press 'x' to EXIT\n\n"
     main_choice = gets.chomp
-    if main_choice == 'l1'
+    if main_choice == 'l'
       add_location
-    elsif main_choice == 'l2'
-      list_locations
-    elsif main_choice == 'b1'
+    elsif main_choice == 'b'
       add_type
-    elsif main_choice == 'b2'
-      list_types
+    elsif main_choice == 's'
+      search
     elsif main_choice == 'x'
       puts "*** THANK YOU, COME AGAIN LATER ***\n\n"
       sleep(1)
@@ -47,31 +43,6 @@ def add_location
   sleep(1.5)
 end
 
-def list_locations
-  puts "*** CURRENT DONATION LOCATIONS ***\n\n"
-  Donation_Location.all.each do |location|
-    puts "#{location.id}. #{location.name}\n\n"
-  end
-  puts "Press 'b' to show all Blood Types available at a specific Donation Location"
-  puts "Press 'x' to return to the Main Menu\n\n"
-  choice = gets.chomp
-  if choice == 'b'
-    puts "Enter the ID of the Location you would like to list available Blood Types for:"
-    id_input = gets.chomp.to_i
-    Blood_Type.list_types_at_location(id_input).each do |type|
-      puts "#{type.id}. #{type.name}\n\n"
-    end
-    sleep(1)
-    list_locations
-  elsif choice == 'x'
-    main_menu
-  else
-    puts "WHOOPS, PLEASE TRY AGAIN."
-    sleep(1)
-    list_locations
-  end
-end
-
 def add_type
   puts "*** NEW BLOOD TYPE ***"
   puts "Please enter a new Blood Type:\n\n"
@@ -82,29 +53,43 @@ def add_type
   sleep(1.5)
 end
 
-def list_types
-  puts "*** CURRENT BLOOD TYPES ***\n\n"
-  Blood_Type.all.each do |type|
-    puts "#{type.id}. #{type.name}\n\n"
-  end
-  puts "Press 'l' to show all Donation Locations that carry a specific Blood Type."
-  puts "Press 'x' to return to the Main Menu\n\n"
-  choice = gets.chomp
-  if choice == 'l'
+def search
+  puts "*** SEARCH FOR BLOOD TYPE OR DONATION LOCATION *** \n\n"
+  puts "Type 'l' to search for any participating Donation Locations holding a specific Blood Type."
+  puts "Type 'b' to see a list of all Blood Types at a specific Donation Location."
+  puts "Press 'x' to return to the main menu"
+  search_choice = gets.chomp
+  if search_choice == 'l'
+    puts "*** CURRENT BLOOD TYPES ***"
+    Blood_Type.all.each do |type|
+      puts "#{type.id}. #{type.name}\n\n"
+    end
     puts "Enter the ID of a Blood Type:"
     id_input = gets.chomp.to_i
     puts "Here are the participating Donation Locations:"
     Donation_Location.list_locations_for_type(id_input).each do |location|
       puts "#{location.id}. #{location.name}\n\n"
     end
-    sleep(1)
-    list_types
-  elsif choice == 'x'
+    sleep(1.5)
+    search
+  elsif search_choice == 'b'
+    puts "*** CURRENT DONATION LOCATIONS ***\n\n"
+    Donation_Location.all.each do |location|
+      puts "#{location.id}. #{location.name}\n\n"
+    end
+    puts "Enter the ID of the Location you would like to list available Blood Types for:"
+    id_input = gets.chomp.to_i
+    Blood_Type.list_types_at_location(id_input).each do |type|
+      puts "#{type.id}. #{type.name}\n\n"
+    end
+    sleep(1.5)
+    search
+  elsif search_choice == 'x'
     main_menu
   else
     puts "WHOOPS, PLEASE TRY AGAIN."
     sleep(1)
-    list_types
+    system 'clear'
   end
 end
 
