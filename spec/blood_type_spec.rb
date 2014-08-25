@@ -43,7 +43,7 @@ describe Blood_Type do
     test_blood_type2.save
     Donation_Location.locate_blood(test_donation_location.id, test_blood_type.id)
     Donation_Location.locate_blood(test_donation_location.id, test_blood_type2.id)
-    blood_types = Blood_Type.list_locations_holding_types(test_donation_location.id)
+    blood_types = Blood_Type.list_types_at_location(test_donation_location.id)
     expect(blood_types).to eq [test_blood_type, test_blood_type2]
   end
 end

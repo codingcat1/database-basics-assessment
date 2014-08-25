@@ -25,7 +25,7 @@ class Blood_Type
     (self.name == another_blood_type.name)
   end
 
-  def self.list_locations_holding_types(location_id)
+  def self.list_types_at_location(location_id)
     results = DB.exec("SELECT blood_types. * FROM donation_locations
       JOIN blood_locations ON (donation_locations.id = blood_locations.donation_location_id)
       JOIN blood_types ON (blood_locations.blood_type_id = blood_types.id)
