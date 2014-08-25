@@ -90,6 +90,22 @@ def list_types
   puts "Press 'l' to show all Donation Locations that carry a specific Blood Type."
   puts "Press 'x' to return to the Main Menu\n\n"
   choice = gets.chomp
+  if choice == 'l'
+    puts "Enter the ID of a Blood Type:"
+    id_input = gets.chomp.to_i
+    puts "Here are the participating Donation Locations:"
+    Donation_Location.list_locations_for_type(id_input).each do |location|
+      puts "#{location.id}. #{location.name}\n\n"
+    end
+    sleep(1)
+    list_types
+  elsif choice == 'x'
+    main_menu
+  else
+    puts "WHOOPS, PLEASE TRY AGAIN."
+    sleep(1)
+    list_types
+  end
 end
 
 
