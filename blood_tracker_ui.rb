@@ -14,8 +14,6 @@ def main_menu
     puts "Press 'b1' to add a Blood Type"
     puts "Press 'b2' to list all Blood Types"
     puts "Press 'bl' to add a Blood type to a specific Donation Location"
-    puts "Press '1' to show all Blood Types that exist at a specific Donation Location"
-    puts "Press '2' to show all Donation Locations with a specfic Blood Type"
     puts "Press 'x' to EXIT\n\n"
     main_choice = gets.chomp
     if main_choice == 'l1'
@@ -26,10 +24,6 @@ def main_menu
       add_type
     elsif main_choice == 'b2'
       list_types
-    elsif main_choice == '1'
-      all_available_types
-    elsif main_choice == '2'
-      all_possessing_locations
     elsif main_choice == 'x'
       puts "*** THANK YOU, COME AGAIN LATER ***\n\n"
       sleep(1)
@@ -61,6 +55,21 @@ def list_locations
   puts "Press 'b' to show all Blood Types available at a specific Donation Location"
   puts "Press 'x' to return to the Main Menu\n\n"
   choice = gets.chomp
+  if choice == 'b'
+    puts "Enter the ID of the Location you would like to list available Blood Types for:"
+    id_input = gets.chomp.to_i
+    Blood_Type.list_types_at_location(id_input).each do |type|
+      puts "#{type.id}. #{type.name}\n\n"
+    end
+    sleep(1)
+    list_locations
+  elsif choice == 'x'
+    main_menu
+  else
+    puts "WHOOPS, PLEASE TRY AGAIN."
+    sleep(1)
+    list_locations
+  end
 end
 
 def add_type
