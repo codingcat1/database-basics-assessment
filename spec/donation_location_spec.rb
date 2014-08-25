@@ -34,5 +34,18 @@ describe Donation_Location do
     expect(test_donation_location.id).to be_an_instance_of Fixnum
   end
 
+  it "connects a blood type to a donation location and returns all donation locations connected to a blood type" do
+    test_donation_location = Donation_Location.new({'name' => 'Red Cross'})
+    test_donation_location.save
+    test_donation_location2 = Donation_Location.new({'name' => 'Green Cross'})
+    test_donation_location2.save
+    test_blood_type = Blood_Type.new({'name' => 'B+'})
+    test_blood_type.save
+    Donation_Location.locate_blood(test_donation_location.id, test_blood_type.id)
+    Donation_Location.locate_blood(test_donation_location2.id, test_blood_type.id)
+    donation_locations = Donation_Location.list_locations_for_type(test_blood_type.id)
+    expect(donation_locations).to eq [test_donation_location, test_donation_location2]
+  end
+
 
 end
