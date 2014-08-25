@@ -3,7 +3,7 @@ require './lib/donation_location'
 require './lib/blood_type'
 require 'pry'
 
-DB = PG.connect(:dbname => "test_blood_tracker_db")
+DB = PG.connect(:dbname => "blood_tracker_db")
 
 def main_menu
   loop do
@@ -11,6 +11,7 @@ def main_menu
     puts "*** WELCOME TO BLOOD TRACKER ***\n\n"
     puts "Press 'l' to add a Donation Location"
     puts "Press 'b' to add a Blood Type"
+    puts "Press 'a' to assign Blood Types to Donation Locations"
     puts "Press 's' to search for all Blood Types at a Location or search for all Locations holding a Blood Type"
     puts "Press 'x' to EXIT\n\n"
     main_choice = gets.chomp
@@ -18,6 +19,8 @@ def main_menu
       add_location
     elsif main_choice == 'b'
       add_type
+    elsif main_choice == 'a'
+      assign
     elsif main_choice == 's'
       search
     elsif main_choice == 'x'
@@ -52,6 +55,22 @@ def add_type
   puts "* #{new_type.name.upcase} * has been added to the list of Blood Types.\n\n"
   sleep(1.5)
 end
+
+# def assign
+#   puts "*** ASSIGN BLOOD TYPES HERE ***"
+#   puts "Press 'a' to add Blood Types to Donation Locations"
+#   puts "Press 'x' to return to the main menu"
+#   choice = gets.chomp
+#   if choice == 'a'
+#     puts "*** CURRENT BLOOD TYPES ***"
+#     Blood_Type.all.each do |type|
+#       puts "#{type.id}. #{type.name}\n\n"
+#     end
+#     puts "*** CURRENT DONATION LOCATIONS ***\n\n"
+#     Donation_Location.all.each do |location|
+#       puts "#{location.id}. #{location.name}\n\n"
+#     end
+# end
 
 def search
   puts "*** SEARCH FOR BLOOD TYPE OR DONATION LOCATION *** \n\n"

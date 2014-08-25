@@ -43,5 +43,4 @@ class Donation_Location
     donation_locations
   end
 
-
 end

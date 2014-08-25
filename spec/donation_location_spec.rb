@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe Donation_Location do
   it "initializes a donation location with a name" do
@@ -46,6 +47,17 @@ describe Donation_Location do
     donation_locations = Donation_Location.list_locations_for_type(test_blood_type.id)
     expect(donation_locations).to eq [test_donation_location, test_donation_location2]
   end
+
+  # it "adds a blood type to a donation location" do
+  #   test_donation_location = Donation_Location.new({'name' => 'Red Cross'})
+  #   test_donation_location.save
+  #   test_blood_type = Blood_Type.new({'name' => 'B+'})
+  #   test_blood_type.save
+  #   Donation_Location.add_type(test_blood_type)
+  #   results = DB.exec("SELECT * FROM blood_locations WHERE donation_location_id = #{test_donation_location.id}")
+  #   expect(results.first['blood_type_id'].to_i).to eq test_blood_type.id
+  # end
+
 
 
 end
