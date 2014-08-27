@@ -56,21 +56,36 @@ def add_type
   sleep(1.5)
 end
 
-# def assign
-#   puts "*** ASSIGN BLOOD TYPES HERE ***"
-#   puts "Press 'a' to add Blood Types to Donation Locations"
-#   puts "Press 'x' to return to the main menu"
-#   choice = gets.chomp
-#   if choice == 'a'
-#     puts "*** CURRENT BLOOD TYPES ***"
-#     Blood_Type.all.each do |type|
-#       puts "#{type.id}. #{type.name}\n\n"
-#     end
-#     puts "*** CURRENT DONATION LOCATIONS ***\n\n"
-#     Donation_Location.all.each do |location|
-#       puts "#{location.id}. #{location.name}\n\n"
-#     end
-# end
+def assign
+  puts "*** ASSIGN BLOOD TYPES HERE ***"
+  puts "Press 'a' to add Blood Types to Donation Locations"
+  puts "Press 'x' to return to the main menu"
+  choice = gets.chomp
+  if choice == 'a'
+    puts "*** CURRENT DONATION LOCATIONS ***"
+    DonationLocation.all.each do |location|
+      puts "#{location.id}. #{location.name}"
+    end
+    puts "\n\n"
+    puts "*** CURRENT BLOOD TYPES ***"
+    BloodType.all.each do |type|
+      puts "#{type.id}. #{type.name}"
+    end
+    puts "Please enter the number of a Donation Location you would like to add a Blood Type to:\n"
+    donation_location_id = gets.chomp.to_i
+    puts "\nEnter the number of Blood Type to add to #{donation_location_id}:\n"
+    blood_type_id = gets.chomp.to_i
+    DonationLocation.locate_blood(donation_location_id, blood_type_id)
+    puts "Location #: #{donation_location_id} is now carrying Blood Type #:#{blood_type_id}.\n\n"
+    assign
+  elsif choice == 'x'
+    main_menu
+  else
+    puts "WHOOPS, PLEASE TRY AGAIN."
+    sleep(1)
+    system 'clear'
+  end
+end
 
 def search
   puts "*** SEARCH FOR BLOOD TYPE OR DONATION LOCATION *** \n\n"
