@@ -40,7 +40,7 @@ def add_location
   puts "*** NEW LOCATION ***"
   puts "Please enter the name of a Donation Location:\n\n"
   location_input = gets.chomp
-  new_location = Donation_Location.new('name' => location_input)
+  new_location = DonationLocation.new('name' => location_input)
   new_location.save
   puts "* #{new_location.name.upcase} * has been added to the list of Donation Locations.\n\n"
   sleep(1.5)
@@ -50,7 +50,7 @@ def add_type
   puts "*** NEW BLOOD TYPE ***"
   puts "Please enter a new Blood Type:\n\n"
   type_input = gets.chomp
-  new_type = Blood_Type.new('name' => type_input)
+  new_type = BloodType.new('name' => type_input)
   new_type.save
   puts "* #{new_type.name.upcase} * has been added to the list of Blood Types.\n\n"
   sleep(1.5)
@@ -80,25 +80,25 @@ def search
   search_choice = gets.chomp
   if search_choice == 'l'
     puts "*** CURRENT BLOOD TYPES ***"
-    Blood_Type.all.each do |type|
+    BloodType.all.each do |type|
       puts "#{type.id}. #{type.name}\n\n"
     end
     puts "Enter the ID of a Blood Type:"
     id_input = gets.chomp.to_i
     puts "Here are the participating Donation Locations:"
-    Donation_Location.list_locations_for_type(id_input).each do |location|
+    DonationLocation.list_locations_for_type(id_input).each do |location|
       puts "#{location.id}. #{location.name}\n\n"
     end
     sleep(1.5)
     search
   elsif search_choice == 'b'
     puts "*** CURRENT DONATION LOCATIONS ***\n\n"
-    Donation_Location.all.each do |location|
+    DonationLocation.all.each do |location|
       puts "#{location.id}. #{location.name}\n\n"
     end
     puts "Enter the ID of the Location you would like to list available Blood Types for:"
     id_input = gets.chomp.to_i
-    Blood_Type.list_types_at_location(id_input).each do |type|
+    BloodType.list_types_at_location(id_input).each do |type|
       puts "#{type.id}. #{type.name}\n\n"
     end
     sleep(1.5)

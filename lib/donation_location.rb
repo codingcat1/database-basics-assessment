@@ -1,4 +1,4 @@
-class Donation_Location
+class DonationLocation
   attr_reader :name, :id
 
   def initialize(attributes)
@@ -10,7 +10,7 @@ class Donation_Location
     donation_locations = []
     results = DB.exec("SELECT * FROM donation_locations")
     results.each do |result|
-      new_donation_location = Donation_Location.new(result)
+      new_donation_location = DonationLocation.new(result)
       donation_locations << new_donation_location
     end
     donation_locations
@@ -37,7 +37,7 @@ class Donation_Location
       WHERE blood_types.id = #{type_id};")
     donation_locations = []
     results.each do |result|
-      current_donation_location = Donation_Location.new(result)
+      current_donation_location = DonationLocation.new(result)
       donation_locations << current_donation_location
     end
     donation_locations
